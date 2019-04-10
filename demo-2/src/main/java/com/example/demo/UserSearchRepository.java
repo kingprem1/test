@@ -18,4 +18,8 @@ public class UserSearchRepository {
 				.orOperator(Criteria.where("userName").regex(text,"i")))
 				, User.class);
 	}
+	
+	/*public List searchUsers() {
+		return (List) mongoTemplate.getCollection("userList");
+	}*/
 }

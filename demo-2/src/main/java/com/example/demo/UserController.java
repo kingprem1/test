@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,8 @@ public class UserController {
 	@Autowired
 	UserSearchRepository userSearchRepository;
 	
+	//AuthenticationManagerBuilder auth;
+	
 	@RequestMapping("/home")
 	public String user(Model model) {
 		model.addAttribute("userList", userRepository.findAll());
@@ -34,7 +37,7 @@ public class UserController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute User user) {
 		System.out.println(user.getUserName() + ":" +user.getPassWord());
 		List<User> curUser = userSearchRepository.searchUsers(user.getUserName());
@@ -50,7 +53,7 @@ public class UserController {
 		}
 		//System.out.println(user.getUserName() + ":" +user.getPassWord());
 		return "login";
-	}
+	}*/
 	
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 	public String register() {
@@ -62,11 +65,14 @@ public class UserController {
 		System.out.println("Wellcome");
 		System.out.println(user.getUserName() + ":" +user.getPassWord());
 		userRepository.save(user);
+		
+		//auth.inMemoryAuthentication().withUser(user.getUserName()).password("{noop}"+user.getPassWord()).roles("USER");
 		return "index";
 	}
 	
 	@RequestMapping(value = "/search")
 	public String search(Model model, @RequestParam String search) {
+		System.out.println("-"+search+"-");
 		model.addAttribute("userList", userSearchRepository.searchUsers(search));
 		model.addAttribute("search", search);
 		return "home";
