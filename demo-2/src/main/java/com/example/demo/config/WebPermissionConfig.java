@@ -11,9 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 //import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.User;
-import com.example.demo.UserRepository;
-import com.example.demo.UserSearchRepository;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.UserSearchRepository;
+import com.example.demo.user.User;
 
 @Configuration
 public class WebPermissionConfig extends WebSecurityConfigurerAdapter {
